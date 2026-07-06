@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Urenregistratie</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 400px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Urenregistratie</h1>
+
+    <input type="text" id="naam" placeholder="Naam">
+    <input type="date" id="datum">
+    <input type="number" id="uren" placeholder="Aantal uren">
+    <button onclick="voegToe()">Toevoegen</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Datum</th>
+                <th>Uren</th>
+            </tr>
+        </thead>
+        <tbody id="lijst"></tbody>
+    </table>
+
+    <h3>Totaal uren: <span id="totaal">0</span></h3>
+
+    <script>
+        let totaalUren = 0;
+
+        function voegToe() {
+            let naam = document.getElementById("naam").value;
+            let datum = document.getElementById("datum").value;
+            let uren = parseFloat(document.getElementById("uren").value);
+
+            if (!naam || !datum || isNaN(uren)) {
+                alert("Vul alles correct in!");
+                return;
+            }
+
+            let tabel = document.getElementById("lijst");
+            let rij = tabel.insertRow();
+
+            let celNaam = rij.insertCell(0);
+            let celDatum = rij.insertCell(1);
+            let celUren = rij.insertCell(2);
+
+            celNaam.innerText = naam;
+            celDatum.innerText = datum;
+            celUren.innerText = uren;
+
+            totaalUren += uren;
+            document.getElementById("totaal").innerText = totaalUren;
+
+            document.getElementById("naam").value = "";
+            document.getElementById("datum").value = "";
+            document.getElementById("uren").value = "";
+        }
+    </script>
+
+</body>
+</html>
